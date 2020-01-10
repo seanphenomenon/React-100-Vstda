@@ -19,7 +19,7 @@ this.props.onChange(event.target.value)
         <h5 className="card-title">I want to...</h5>
         <div className="form-group shadow-textarea">
           <textarea className="form-control z-depth-1" className="create-todo-text" id="exampleFormControlTextarea6" rows="3"
-          placeholder="Write something here..."  onChange={this.handleChange.bind(this)} ></textarea>
+          placeholder="Write something here..." value={this.props.value} onChange={this.handleChange.bind(this)} ></textarea>
         </div>
 
         <h5>How much of a priority is this?</h5>

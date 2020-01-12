@@ -7,17 +7,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       newitem:'',
-      listitem :[]
-  }
-  this.handleOnChange = this.handleOnChange.bind(this);
-  this.handleOnClick = this.handleOnClick.bind(this);
+      description:'',
+      priority: '',
+      todoList:[],
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.addToDo = this.addToDo.bind(this);
   }
 
-handleOnChange (event){
-// this.setState({
-//   newitem: event.target.value})
-console.log(event)
+handleChange (event){
+this.setState({
+  [event.target.name]: event.target.value});
 }
 
 // addToList(newitem){
@@ -28,23 +28,45 @@ console.log(event)
 //     })
 //   }
 
-handleOnClick(event){
-  console.log('I was clicked')
-
-  // attach priority level to new item
-
-  // push new item into list item array and populate list
-
-  this.setState({
-
-  })
-  event.preventDefault();
+// return type methods below. we are returning the string of each todo color in the list.
+getAlert(priority) {
+  let bgcolor= '';
+  if (priority === '1'){
+    bgcolor = 'alert alert-success';
+  } else if (priority === '2'){
+    bgcolor = 'alert alert-warning';
+  } else {
+    bgcolor= 'alert alert-danger';
+  }
+  return bgcolor;
 }
 
+  addToDo(event){
+    event.preventDefault();
+
+    // Below will iterate through the list/makes copy of todolist. TO DO: isEditing is for when you need to render the new editing component that you will create for the list
+    let newList = [...this.state.todoList];
+    let newItem = {
+      key: new Date().getMilliseconds(),
+      description: this.state.description,
+      priority: this.state.priority,
+      alert: this.getAlert(this.state.priority),
+      isEditing: false
+    };
+
+    // below clears text area after input below
+    // once you click add, it will take whatever is in description and priority and clears text area after add a new todo.
+
+    newList.push(newItem);
+    this.setState({
+      todoList: newList,
+      description: '',
+      priority: ''
+    });
+  }
+
 render(){
-
   return (
-
   <div className='container-fluid'>
         <h1> Very Simple Todo App</h1>
         <h4> Track all of the things</h4>
@@ -56,7 +78,7 @@ render(){
               <div className="card-header">
                 Add New Todo
                 </div>
-              <NewItem value ={this.state.newitem} onChange={this.handleOnChange} onClick ={this.handleOnClick}/>
+              <NewItem description={this.state.description} priority={this.state.priority} handleChange={this.handleChange} addToDo ={this.addToDo}/>
             </div>
           </div>
 
@@ -65,8 +87,8 @@ render(){
               <div className="card-header">
                 View Todos
                   </div>
-              <ListItem />
-               </div>
+                    <ListItem todoList={this.state.todoList} />
+                </div>
           </div>
         </div>
     </div>

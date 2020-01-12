@@ -1,34 +1,25 @@
 import React from 'react';
+import ToDo from './ToDo';
 
 class ListItem extends React.Component {
 
   constructor(props) {
     super(props);
-
   }
 
   render() {
-
     return (
       <div>
-        <ul className="list-group">
-
-          {/* const newtodos = {this.props.value};
-          const ListItems = newtodos.map((value)) =>
-            <li>{this.props.value}</li> */}
-
-
-
-
-
-
-
-          {/* <li className="list-group-item"></li>
-          <li className="list-group-item"></li>
-          <li className="list-group-item"></li>
-          <li className="list-group-item"></li>
-          <li className="list-group-item"></li> */}
-        </ul>
+        <div>
+        {
+        // conditional rendering below: if there's something in list, it will map items in list.
+          this.props.todoList && this.props.todoList.map((item, index) => {
+            return (
+              <ToDo alert={item.alert} key={item.key} description={item.description} index={index} isEditing={item.isEditing}/>
+            )
+          })
+        }
+        </div>
       </div>
 
 

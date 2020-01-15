@@ -13,20 +13,27 @@ class App extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.addToDo = this.addToDo.bind(this);
+    this.handleDelete=this.handleDelete.bind(this);
+    this.handleEdit= this.handleEdit.bind(this);
   }
 
-handleChange (event){
+handleChange(event){
 this.setState({
   [event.target.name]: event.target.value});
 }
 
-// addToList(newitem){
-//   let listItemsArray = this.state.listitem;
-//     listItemsArray.push(this.state.newitem)
-//     this.setState ({
-//       listitem
-//     })
-//   }
+handleDelete(event){
+
+  this.setState ({
+  [event.target.name]: event.target.value});
+  console.log(event.target.name)
+}
+
+handleEdit(event){
+  this.setState({
+  [event.target.name]: event.target.value});
+  console.log(event.target.name)
+}
 
 // return type methods below. we are returning the string of each todo color in the list.
 getAlert(priority) {
@@ -66,6 +73,7 @@ getAlert(priority) {
   }
 
 render(){
+
   return (
   <div className='container-fluid'>
         <h1> Very Simple Todo App</h1>
@@ -87,7 +95,7 @@ render(){
               <div className="card-header">
                 View Todos
                   </div>
-                    <ListItem todoList={this.state.todoList} />
+                    <ListItem todoList={this.state.todoList} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
                 </div>
           </div>
         </div>

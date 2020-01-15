@@ -7,7 +7,7 @@ class EditToDo extends React.Component{
 
   }
 }
-// need to create state with edit description/priority ( make text input for de)
+// need to possibly create state with edit description/priority (make text input to edit description)
 // create inputs with name value equal to state value
 // create button to save new values and replace the old values
 

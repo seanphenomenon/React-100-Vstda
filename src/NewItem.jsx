@@ -18,8 +18,7 @@ class NewItem extends React.Component {
 
         <h5>How much of a priority is this?</h5>
         <select name='priority' value={this.props.priority} onChange={this.props.handleChange} className="browser-default custom-select custom-select-lg mb-3">
-
-          <option defaultValue>Select a priority</option>
+        <option defaultValue>Select one below</option>
           <option value="1">High</option>
           <option value="2">Medium</option>
           <option value="3">Low</option>

@@ -1,20 +1,26 @@
 import React from 'react';
 
 class ToDo extends React.Component{
+
   constructor(props){
   super(props);
   }
 
   render(){
+
     return(
       <div className={this.props.alert}>
         <div className='row'>
-          <div className='col-sm-4 col-md-4 col-lg-4'>{this.props.index}</div>
+          <input className='col-sm-4 col-md-4 col-lg-4'type='checkbox' id="checkbox"/>
          <div className='col-sm-4 col-md-4 col-lg-4'>{this.props.description}</div>
-          <div className='col-sm-4 col-md-4 col-lg-4'>
-            <button>edit</button>
-            <button>delete</button>
+          <div className='col-sm-3 col-md-3 col-lg-3'>
+            <button type='button' name ={this.props.description} className="far fa-edit edit-todo" id="edit-icon" onClick={this.props.handleEdit}></button>
+            <button type='button' name={this.props.description} className="fas fa-trash-alt delete-todo" id="trash-icon" onClick={this.props.handleDelete}></button>
+
           </div>
+          <div>
+          </div>
+
           {/*
             <div className='row'>
               {
@@ -23,7 +29,8 @@ class ToDo extends React.Component{
             </div>
           */}
         </div>
-      </div>
+        </div>
+
 
     );
   }

@@ -22,11 +22,14 @@ this.setState({
   [event.target.name]: event.target.value});
 }
 
-handleDelete(event){
+handleDelete(todoDescription){
+  let newList = [...this.state.todoList]
+  // filter function below will be used to create new array
+  let updatedList = newList.filter(item =>item.description != todoDescription)
 
   this.setState ({
-  [event.target.name]: event.target.value});
-  console.log(event.target.name)
+  todoList: updatedList
+  })
 }
 
 handleEdit(event){
@@ -61,8 +64,10 @@ getAlert(priority) {
       isEditing: false
     };
 
+console.log (newList)
+
     // below clears text area after input below
-    // once you click add, it will take whatever is in description and priority and clears text area after add a new todo.
+    // once add button is clicked, it will take whatever the description and priority is, clear textarea, and pass new todo as object to list.
 
     newList.push(newItem);
     this.setState({

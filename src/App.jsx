@@ -10,6 +10,7 @@ class App extends Component {
       description:'',
       priority: '',
       todoList:[],
+      isEditing: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.addToDo = this.addToDo.bind(this);
@@ -23,6 +24,7 @@ this.setState({
 }
 
 handleDelete(todoDescription){
+  // below creates copy of current todoList state.
   let newList = [...this.state.todoList]
   // filter function below will be used to create new array
   let updatedList = newList.filter(item =>item.description != todoDescription)
@@ -32,13 +34,23 @@ handleDelete(todoDescription){
   })
 }
 
-handleEdit(event){
+handleEdit(index){
+  let newList = [...this.state.todoList];
+
+  if (newList[index]["isEditing"] == false){
+    newList[index]["isEditing"] = true;
+  }else {
+     newList[index]["isEditing"] = false;
+  }
+
+console.log(newList)
   this.setState({
   [event.target.name]: event.target.value});
-  console.log(event.target.name)
-}
+  console.log('The Event was clicked')
 
-// return type methods below. we are returning the string of each todo color in the list.
+
+}
+// Below will set the priority color of each todo item in the list.
 getAlert(priority) {
   let bgcolor= '';
   if (priority === '1'){
@@ -54,7 +66,7 @@ getAlert(priority) {
   addToDo(event){
     event.preventDefault();
 
-    // Below will iterate through the list/makes copy of todolist. TO DO: isEditing is for when you need to render the new editing component that you will create for the list
+    // Below will iterate through the list/makes copy of todolist. isEditing is for when you need to render the new editing component that you will create for the list
     let newList = [...this.state.todoList];
     let newItem = {
       key: new Date().getMilliseconds(),
@@ -100,7 +112,7 @@ render(){
               <div className="card-header">
                 View Todos
                   </div>
-                    <ListItem todoList={this.state.todoList} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
+                    <ListItem todoList={this.state.todoList} handleDelete={this.handleDelete} handleEdit={this.handleEdit}/>
                 </div>
           </div>
         </div>

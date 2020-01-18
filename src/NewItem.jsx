@@ -12,7 +12,7 @@ class NewItem extends React.Component {
       <div className="card-body" >
         <h5 className="card-title">I want to...</h5>
         <div className="form-group shadow-textarea">
-          <textarea name='description' className="form-control z-depth-1 create-todo-next" id="exampleFormControlTextarea6" rows="3"
+          <textarea name='description' className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3"
           placeholder="Write something here..." value={this.props.description} onChange={this.props.handleChange} />
         </div>
 
@@ -23,7 +23,7 @@ class NewItem extends React.Component {
           <option value="2">Medium</option>
           <option value="3">Low</option>
         </select>
-        <button className= "btn btn-primary btn-block" cursor='pointer' onClick ={this.props.addToDo}>Add</button>
+        <button className="btn btn-primary btn-block" cursor='pointer' onClick={this.props.addToDo}>Add</button>
       </div>
 
 

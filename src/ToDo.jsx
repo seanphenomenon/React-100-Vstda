@@ -4,8 +4,8 @@ class ToDo extends React.Component {
 
   constructor(props) {
     super(props);
-  }
 
+  }
 
   render() {
 
@@ -13,7 +13,7 @@ class ToDo extends React.Component {
 
       <div className={this.props.alert}>
         <div className='row'>
-          <input className='col-sm-4 col-md-4 col-lg-4' type='checkbox' id="checkbox"/>
+          <input className='col-sm-4 col-md-4 col-lg-4' type='checkbox' id="checkbox" onClick={this.handleCheck}/>
           <div className='col-sm-4 col-md-4 col-lg-4'>{this.props.description}</div>
           <div className='col-sm-3 col-md-3 col-lg-3'>
             <button type='button' name={this.props.description} className="far fa-edit edit-todo" id="edit-icon" onClick={() => this.props.handleEdit(this.props.index)}></button>

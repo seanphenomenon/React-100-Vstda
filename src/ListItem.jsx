@@ -33,7 +33,8 @@ class ListItem extends React.Component {
                       index={index}
                       isEditing={item.isEditing}
                       handleDelete={this.props.handleDelete}
-                      handleEdit={this.props.handleEdit}/>
+                      handleEdit={this.props.handleEdit}
+                      isChecked={item.isChecked}/>
                   )
                 } else if (item.isEditing === true) {
                   return (
@@ -43,8 +44,7 @@ class ListItem extends React.Component {
                       description={item.description}
                       index={index}
                       isEditing={item.isEditing}
-                      editedDescription={this.props.editedDescription}
-                      handleSaveEdit={this.props.handleSaveEdit} />
+                      handleSave={this.props.handleSave}/>
                   )
                 }
 

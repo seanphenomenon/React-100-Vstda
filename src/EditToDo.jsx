@@ -4,8 +4,30 @@ class EditToDo extends React.Component{
 
   constructor(props){
     super(props);
+    this.state ={
+      description: '',
+      priority:'',
+      isEditing: false
 
-  }
+}
+
+this.handleChange=this.handleChange.bind(this);
+this.handleSave=this.handleSave.bind(this);
+}
+
+handleChange(e){
+
+this.setState({
+[e.target.name]: e.target.value});
+
+}
+
+handleSave(e){
+  // used addToDo function from App component, and altered alert value to this.props.getAlert
+  e.preventDefault();
+  console.log(e);
+this.props.handleSave(this.props.description, this.state.description, this.state.priority);
+}
 
   render(){
 
@@ -13,11 +35,11 @@ class EditToDo extends React.Component{
         <div>
       <form>
         <div className="alert alert-dark">
-        <label for="formGroupExampleInput">Description</label>
-        <textarea type="text" name="updatedDescription" className="form-control" id="formGroupExampleInput" defaultValue={this.props.description} value={this.props.editedDescription}></textarea>
+        <label htmlFor="description">Description: {this.props.description}</label>
+        <textarea type="text" name="description" className="form-control" id="formGroupExampleInput"  value={this.state.description} onChange={this.handleChange}></textarea>
         <div className = "Row">
-      <label for="formGroupExampleInput2">Priority</label>
-      <select type="text" name="updatedPriority" className="browser-default custom-select custom-select-lg mb-3" id="formGroupExampleInput2" defaultValue={this.props.priority} value={this.props.editedPriority}>
+      <label htmlFor="priority">Priority</label>
+      <select type="text" name="priority" className="browser-default custom-select custom-select-lg mb-3" id="formGroupExampleInput2"  value={this.state.priority} onChange={this.handleChange}>
        <option defaultValue>Select one below</option>
           <option value="1">High</option>
           <option value="2">Medium</option>
@@ -25,15 +47,13 @@ class EditToDo extends React.Component{
         </select>
 
     </div>
-        <button type="button" className='btn-success update-todo' name='description' onClick={()=> this.props.handleSaveEdit(this.props.editedDescription)}>Save</button>
+        <button type="button" className='btn-success update-todo' name='description' onClick={this.handleSave}>Save</button>
     </div>
     </form>
   </div>
 
   );
-
-// editing gis looking back at array similar to deleteing function..instead its not deleteing anything its editing it. delete buton istied to list item, and list item is connected to parent.
-  }
+ }
 }
 
 

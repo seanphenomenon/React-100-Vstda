@@ -17,7 +17,9 @@ class App extends Component {
     this.addToDo = this.addToDo.bind(this);
     this.handleDelete=this.handleDelete.bind(this);
     this.handleEdit= this.handleEdit.bind(this);
-    this.handleSaveEdit= this.handleSaveEdit.bind(this);
+    this.getAlert=this.getAlert.bind(this);
+    this.handleSave=this.handleSave.bind(this);
+    this.handleCheck=this.handleCheck.bind(this);
   }
 
 handleChange(event){
@@ -35,33 +37,65 @@ handleDelete(todoDescription){
   this.setState ({
   todoList: updatedList
   })
+
 }
 
 handleEdit(index){
-  let newList = [...this.state.todoList];
 
-  if (newList[index]["isEditing"] == false){
-    newList[index]["isEditing"] = true;
-  }else {
-     newList[index]["isEditing"] = false;
+  const list = [...this.state.todoList];
+
+  // iterates through object looking for description property
+
+  for (let i=0; i<list.length; i++){
+
+  if (i === index){
+    list[i].isEditing = true;
   }
 
-console.log(newList)
+  // below targeted isEditing property in Array Object
+
+  // if (newList[index]["isEditing"] == false){
+  //   newList[index]["isEditing"] = true;
+  // }else {
+  //    newList[index]["isEditing"] = false;
+  // }
+
+}
+//  below set state updates the list
+  this.setState({
+   todoList:list });
+  console.log('The Edit Button was clicked')
+}
+
+handleCheck(){
+
+
+}
+
+
+handleSave(oldDescription, desc, prior){
+  const list = [...this.state.todoList];
+ const newItem = {
+      key: new Date().getMilliseconds(),
+      description: desc,
+      priority: prior,
+      alert: this.getAlert(prior),
+      isEditing: false
+ };
+
+ for (let i=0; i<list.length; i++){
+
+// iterate through object looking for description property
+  if (list[i].description === oldDescription){
+    list.splice(i, 1, newItem);
+  }
+}
 
   this.setState({
-  [event.target.name]: event.target.value});
-  console.log('The Event was clicked')
-}
-
-
-handleSaveEdit(event){
-let editedDescription = this.editedDescription
-
-  console.log(event)
+    todoList:list
+  });
 
 }
-
-
 
 
 
@@ -89,7 +123,9 @@ getAlert(priority) {
       description: this.state.description,
       priority: this.state.priority,
       alert: this.getAlert(this.state.priority),
-      isEditing: false
+      isEditing: false,
+      isChecked: false
+
     };
 
 console.log (newList)
@@ -136,8 +172,10 @@ render(){
                     todoList={this.state.todoList}
                     handleDelete={this.handleDelete}
                     handleEdit={this.handleEdit}
-                    editedDescription={this.editedDescription}
-                    handleSaveEdit={this.handleSaveEdit}/>
+                    description={this.props.description}
+                    handleSave={this.handleSave}
+                    handleChange={this.handleChange}
+                    getAlert = {this.getAlert}/>
                 </div>
           </div>
         </div>

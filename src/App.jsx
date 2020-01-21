@@ -19,7 +19,6 @@ class App extends Component {
     this.handleEdit= this.handleEdit.bind(this);
     this.getAlert=this.getAlert.bind(this);
     this.handleSave=this.handleSave.bind(this);
-    this.handleCheck=this.handleCheck.bind(this);
   }
 
 handleChange(event){
@@ -67,11 +66,6 @@ handleEdit(index){
   console.log('The Edit Button was clicked')
 }
 
-handleCheck(){
-
-
-}
-
 
 handleSave(oldDescription, desc, prior){
   const list = [...this.state.todoList];
@@ -81,6 +75,7 @@ handleSave(oldDescription, desc, prior){
       priority: prior,
       alert: this.getAlert(prior),
       isEditing: false
+
  };
 
  for (let i=0; i<list.length; i++){
@@ -124,7 +119,7 @@ getAlert(priority) {
       priority: this.state.priority,
       alert: this.getAlert(this.state.priority),
       isEditing: false,
-      isChecked: false
+
 
     };
 

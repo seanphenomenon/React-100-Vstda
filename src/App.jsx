@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NewItem from './NewItem';
-import ListItem from './ListItem'
+import ListItem from './ListItem';
 
 class App extends Component {
 
@@ -10,12 +10,14 @@ class App extends Component {
       description:'',
       priority: '',
       todoList:[],
-      isEditing: false
+      isEditing: false,
+
     }
     this.handleChange = this.handleChange.bind(this);
     this.addToDo = this.addToDo.bind(this);
     this.handleDelete=this.handleDelete.bind(this);
     this.handleEdit= this.handleEdit.bind(this);
+    this.handleSaveEdit= this.handleSaveEdit.bind(this);
   }
 
 handleChange(event){
@@ -23,6 +25,7 @@ this.setState({
   [event.target.name]: event.target.value});
 }
 
+//  editing function should copy delete pattern similary to how you targeted  only one delete item
 handleDelete(todoDescription){
   // below creates copy of current todoList state.
   let newList = [...this.state.todoList]
@@ -44,14 +47,27 @@ handleEdit(index){
   }
 
 console.log(newList)
+
   this.setState({
   [event.target.name]: event.target.value});
   console.log('The Event was clicked')
+}
 
+
+handleSaveEdit(event){
+let editedDescription = this.editedDescription
+
+  console.log(event)
 
 }
+
+
+
+
+
 // Below will set the priority color of each todo item in the list.
 getAlert(priority) {
+
   let bgcolor= '';
   if (priority === '1'){
     bgcolor = 'alert alert-success';
@@ -103,7 +119,11 @@ render(){
               <div className="card-header">
                 Add New Todo
                 </div>
-              <NewItem description={this.state.description} priority={this.state.priority} handleChange={this.handleChange} addToDo ={this.addToDo}/>
+              <NewItem
+              description={this.state.description}
+              priority={this.state.priority}
+              handleChange={this.handleChange}
+              addToDo ={this.addToDo}/>
             </div>
           </div>
 
@@ -112,7 +132,12 @@ render(){
               <div className="card-header">
                 View Todos
                   </div>
-                    <ListItem todoList={this.state.todoList} handleDelete={this.handleDelete} handleEdit={this.handleEdit}/>
+                    <ListItem
+                    todoList={this.state.todoList}
+                    handleDelete={this.handleDelete}
+                    handleEdit={this.handleEdit}
+                    editedDescription={this.editedDescription}
+                    handleSaveEdit={this.handleSaveEdit}/>
                 </div>
           </div>
         </div>

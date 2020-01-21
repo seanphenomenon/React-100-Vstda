@@ -13,12 +13,12 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/../public')));
 app.use(express.static(path.join(__dirname, '/../dist')));
 
-app.listen(8080);
+app.listen(3000);
 
 const url = 'http://localhost:3000';
 
 describe('Very Simple To Do App', function main() {
-  this.timeout(12000);
+  this.timeout(18000);
   this.slow(4000);
 
   beforeEach(() => {

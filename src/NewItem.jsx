@@ -12,13 +12,13 @@ class NewItem extends React.Component {
       <div className="card-body" >
         <h5 className="card-title">I want to...</h5>
         <div className="form-group shadow-textarea">
-          <textarea name='description' className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3"
-          placeholder="Write something here..." value={this.props.description} onChange={this.props.handleChange} />
+          <textarea name='description' className="form-control z-depth-1 create-todo-text" id="exampleFormControlTextarea6" rows="3"
+            placeholder="Write something here..." value={this.props.description} onChange={this.props.handleChange} />
         </div>
 
         <h5>How much of a priority is this?</h5>
         <select name='priority' value={this.props.priority} onChange={this.props.handleChange} className="browser-default custom-select custom-select-lg mb-3">
-        <option defaultValue>Select one below</option>
+          <option defaultValue>Select one below</option>
           <option value="1">High</option>
           <option value="2">Medium</option>
           <option value="3">Low</option>

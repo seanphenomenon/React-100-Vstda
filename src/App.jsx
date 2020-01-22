@@ -7,108 +7,110 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      description:'',
+      description: '',
       priority: '',
-      todoList:[],
+      todoList: [],
       isEditing: false,
 
     }
     this.handleChange = this.handleChange.bind(this);
     this.addToDo = this.addToDo.bind(this);
-    this.handleDelete=this.handleDelete.bind(this);
-    this.handleEdit= this.handleEdit.bind(this);
-    this.getAlert=this.getAlert.bind(this);
-    this.handleSave=this.handleSave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.getAlert = this.getAlert.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
-handleChange(event){
-this.setState({
-  [event.target.name]: event.target.value});
-}
-
-//  editing function should copy delete pattern similary to how you targeted  only one delete item
-handleDelete(todoDescription){
-  // below creates copy of current todoList state.
-  let newList = [...this.state.todoList]
-  // filter function below will be used to create new array
-  let updatedList = newList.filter(item =>item.description != todoDescription)
-
-  this.setState ({
-  todoList: updatedList
-  })
-
-}
-
-handleEdit(index){
-
-  const list = [...this.state.todoList];
-
-  // iterates through object looking for description property
-
-  for (let i=0; i<list.length; i++){
-
-  if (i === index){
-    list[i].isEditing = true;
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
-  // below targeted isEditing property in Array Object
 
-  // if (newList[index]["isEditing"] == false){
-  //   newList[index]["isEditing"] = true;
-  // }else {
-  //    newList[index]["isEditing"] = false;
-  // }
+  handleDelete(todoDescription) {
+    // below creates copy of current todoList state.
+    let newList = [...this.state.todoList]
+    // filter function below will be used to create new array with descriptions not equal to item. description.
+    let updatedList = newList.filter(item => item.description != todoDescription);
 
-}
-//  below set state updates the list
-  this.setState({
-   todoList:list });
-  console.log('The Edit Button was clicked')
-}
+    this.setState({
+      todoList: updatedList
+    });
+
+  }
+
+  handleEdit(index) {
+
+    const list = [...this.state.todoList];
+
+    // iterates through object looking for index property. If false, isEditing becomes true when edit button is clicked.
+
+    for (let i = 0; i < list.length; i++) {
+
+      if (i === index) {
+        list[i].isEditing = true;
+      }
+
+      // below targeted isEditing property in Array Object
+
+      // if (newList[index]["isEditing"] == false){
+      //   newList[index]["isEditing"] = true;
+      // }else {
+      //    newList[index]["isEditing"] = false;
+      // }
+
+    }
+    //  set state below updates the list
+    this.setState({
+      todoList: list
+    });
+    console.log('The Edit Button was clicked')
+  }
 
 
-handleSave(oldDescription, desc, prior){
-  const list = [...this.state.todoList];
- const newItem = {
+  handleSave(oldDescription, description, priority) {
+    const list = [...this.state.todoList];
+    const newItem = {
       key: new Date().getMilliseconds(),
-      description: desc,
-      priority: prior,
-      alert: this.getAlert(prior),
+      description: description,
+      priority: priority,
+      alert: this.getAlert(priority),
       isEditing: false
 
- };
+    };
+    // iterates through object looking for description value
+    for (let i = 0; i < list.length; i++) {
 
- for (let i=0; i<list.length; i++){
 
-// iterate through object looking for description property
-  if (list[i].description === oldDescription){
-    list.splice(i, 1, newItem);
+      if (list[i].description === oldDescription) {
+        list.splice(i, 1, newItem);
+      }
+    }
+
+    this.setState({
+      todoList: list
+    });
+
   }
-}
-
-  this.setState({
-    todoList:list
-  });
-
-}
 
 
 
-// Below will set the priority color of each todo item in the list.
-getAlert(priority) {
+  // Below will set the priority color of each todo item in the list.
+  getAlert(priority) {
 
-  let bgcolor= '';
-  if (priority === '1'){
-    bgcolor = 'alert alert-success';
-  } else if (priority === '2'){
-    bgcolor = 'alert alert-warning';
-  } else {
-    bgcolor= 'alert alert-danger';
+    let bgcolor = '';
+    if (priority === '1') {
+      bgcolor = 'alert alert-success';
+    } else if (priority === '2') {
+      bgcolor = 'alert alert-warning';
+    } else {
+      bgcolor = 'alert alert-danger';
+    }
+    return bgcolor;
   }
-  return bgcolor;
-}
 
-  addToDo(event){
+  addToDo(event) {
     event.preventDefault();
 
     // Below will iterate through the list/makes copy of todolist. isEditing is for when you need to render the new editing component that you will create for the list
@@ -119,16 +121,14 @@ getAlert(priority) {
       priority: this.state.priority,
       alert: this.getAlert(this.state.priority),
       isEditing: false,
-
-
     };
-
-console.log (newList)
+    console.log(newList)
 
     // below clears text area after input below
     // once add button is clicked, it will take whatever the description and priority is, clear textarea, and pass new todo as object to list.
 
     newList.push(newItem);
+
     this.setState({
       todoList: newList,
       description: '',
@@ -136,10 +136,10 @@ console.log (newList)
     });
   }
 
-render(){
+  render() {
 
-  return (
-  <div className='container-fluid'>
+    return (
+      <div className='container-fluid'>
         <h1> Very Simple Todo App</h1>
         <h4> Track all of the things</h4>
         <hr />
@@ -151,10 +151,10 @@ render(){
                 Add New Todo
                 </div>
               <NewItem
-              description={this.state.description}
-              priority={this.state.priority}
-              handleChange={this.handleChange}
-              addToDo ={this.addToDo}/>
+                description={this.state.description}
+                priority={this.state.priority}
+                handleChange={this.handleChange}
+                addToDo={this.addToDo} />
             </div>
           </div>
 
@@ -163,18 +163,18 @@ render(){
               <div className="card-header">
                 View Todos
                   </div>
-                    <ListItem
-                    todoList={this.state.todoList}
-                    handleDelete={this.handleDelete}
-                    handleEdit={this.handleEdit}
-                    description={this.props.description}
-                    handleSave={this.handleSave}
-                    handleChange={this.handleChange}
-                    getAlert = {this.getAlert}/>
-                </div>
+              <ListItem
+                todoList={this.state.todoList}
+                handleDelete={this.handleDelete}
+                handleEdit={this.handleEdit}
+                description={this.props.description}
+                handleSave={this.handleSave}
+                handleChange={this.handleChange}
+                getAlert={this.getAlert} />
+            </div>
           </div>
         </div>
-    </div>
+      </div>
     );
   }
 }

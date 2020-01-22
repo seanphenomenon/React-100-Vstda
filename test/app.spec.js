@@ -18,7 +18,7 @@ app.listen(3000);
 const url = 'http://localhost:3000';
 
 describe('Very Simple To Do App', function main() {
-  this.timeout(18000);
+  this.timeout(30000);
   this.slow(4000);
 
   beforeEach(() => {
@@ -50,7 +50,7 @@ describe('Very Simple To Do App', function main() {
       .select('select.create-todo-priority', '1')
       .type('textarea.create-todo-text', 'ITEM')
       .click('button.create-todo')
-      .wait(500)
+      .wait(800)
       .evaluate(() => {
         const { innerText, className } = document.querySelectorAll('li')[0];
         return { innerText, className };
@@ -67,7 +67,7 @@ describe('Very Simple To Do App', function main() {
       .select('select.create-todo-priority', '1')
       .type('textarea.create-todo-text', 'ITEM')
       .click('button.create-todo')
-      .wait(500)
+      .wait(800)
       .evaluate(() => [
         document.querySelectorAll('.edit-todo').length,
         document.querySelectorAll('.delete-todo').length
@@ -107,7 +107,7 @@ describe('Very Simple To Do App', function main() {
       .click('button.create-todo')
       .wait('.delete-todo')
       .click('.delete-todo')
-      .wait(250)
+      .wait(300)
       .evaluate(() => document.querySelectorAll('li').length)
       .end()
       .then(length => expect(length).to.equal(1))

@@ -141,7 +141,7 @@ class App extends Component {
     return (
       <div className='container-fluid'>
         <h1> Very Simple Todo App</h1>
-        <h4> Track all of the things</h4>
+        <h4> Keep track of all your daily tasks </h4>
         <hr />
 
         <div className="row">
